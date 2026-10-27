@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sahar Sports — Coming soon</title>
+    <meta name="description" content="Sahar Sports is coming soon." />
+    <style>
+      /* Placeholder colors: swap in the brand colors here. */
+      :root {
+        --background: #ffffff;
+        --text: #111111;
+        --muted: #6b6b6b;
+        --border: #d4d4d4;
+        --button: #111111;
+        --button-text: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        display: grid;
+        place-items: center;
+        padding: 24px 16px;
+        background: var(--background);
+        color: var(--text);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        text-align: center;
+      }
+
+      main {
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .logo {
+        margin: 0;
+        font-size: 2.25rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .tagline {
+        margin: 8px 0 32px;
+        color: var(--muted);
+        font-size: 1.125rem;
+      }
+
+      form {
+        display: flex;
+        gap: 8px;
+      }
+
+      input {
+        flex: 1;
+        min-width: 0;
+        height: 44px;
+        padding: 0 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--background);
+        color: var(--text);
+        font: inherit;
+      }
+
+      input:focus {
+        outline: 2px solid var(--button);
+        outline-offset: -1px;
+      }
+
+      button {
+        height: 44px;
+        padding: 0 18px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--button);
+        color: var(--button-text);
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button:focus-visible {
+        outline: 2px solid var(--button);
+        outline-offset: 2px;
+      }
+
+      button:disabled {
+        opacity: 0.6;
+      }
+
+      .message {
+        min-height: 1.5em;
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-size: 0.875rem;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+
+      @media (max-width: 400px) {
+        form {
+          flex-direction: column;
+        }
+
+        input {
+          flex: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- Placeholder wordmark: replace with <img src="logo.svg" alt="Sahar Sports"> once the logo is ready. -->
+      <h1 class="logo">Sahar Sports</h1>
+      <p class="tagline">Coming soon.</p>
+
+      <form id="signup" novalidate>
+        <label for="email" class="visually-hidden">Email address</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="Your email" required />
+        <button type="submit">Notify me</button>
+      </form>
+      <p id="message" class="message" role="status"></p>
+    </main>
+
+    <script>
+      // Signups POST straight to a Google Form (see README.md for finding these two values).
+      // While either is empty, emails are NOT saved anywhere.
+      const GOOGLE_FORM_ACTION = ""; // https://docs.google.com/forms/d/e/<form id>/formResponse
+      const GOOGLE_FORM_EMAIL_FIELD = ""; // entry.<number>
+
+      const form = document.getElementById("signup");
+      const input = document.getElementById("email");
+      const button = form.querySelector("button");
+      const message = document.getElementById("message");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = input.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          message.textContent = "Enter a valid email address.";
+          input.focus();
+          return;
+        }
+
+        button.disabled = true;
+        try {
+          if (GOOGLE_FORM_ACTION && GOOGLE_FORM_EMAIL_FIELD) {
+            // Google sends no CORS headers, so the response can't be read; network errors still throw.
+            await fetch(GOOGLE_FORM_ACTION, {
+              method: "POST",
+              mode: "no-cors",
+              body: new URLSearchParams({ [GOOGLE_FORM_EMAIL_FIELD]: email }),
+            });
+          } else {
+            console.warn("Google Form isn't connected yet, so this email was not saved.");
+          }
+          form.hidden = true;
+          message.textContent = "Thanks! We'll email you when we launch.";
+        } catch {
+          message.textContent = "Something went wrong. Please try again.";
+          button.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
