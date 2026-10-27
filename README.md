@@ -1,10 +1,11 @@
 # Sahar Sports
 
-Coming-soon page: one `index.html`, no build step. Open it in a browser to preview.
+Coming-soon page (`index.html`) plus a short privacy page (`privacy.html`), sharing `style.css`.
+No build step. Open `index.html` in a browser to preview.
 
 ## Colors
 
-Placeholder grays for now. Swap the values at the top of the `<style>` block in `index.html`.
+Placeholder grays for now. Swap the values at the top of `style.css`.
 
 ## Email signups (Google Form)
 

@@ -1,0 +1,160 @@
+/* Placeholder colors: swap in the brand colors here. */
+:root {
+  --background: #ffffff;
+  --text: #111111;
+  --muted: #6b6b6b;
+  --border: #d4d4d4;
+  --button: #111111;
+  --button-text: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Coming-soon page */
+
+.home {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.home main {
+  width: 100%;
+  max-width: 420px;
+}
+
+.logo {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  margin: 8px 0 32px;
+  color: var(--muted);
+  font-size: 1.125rem;
+}
+
+form {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--background);
+  color: var(--text);
+  font: inherit;
+}
+
+input:focus {
+  outline: 2px solid var(--button);
+  outline-offset: -1px;
+}
+
+button {
+  height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--button);
+  color: var(--button-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--button);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.6;
+}
+
+.message {
+  min-height: 1.5em;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.privacy-link {
+  margin: 16px 0 0;
+  font-size: 0.8125rem;
+}
+
+.privacy-link a {
+  color: var(--muted);
+}
+
+@media (max-width: 400px) {
+  form {
+    flex-direction: column;
+  }
+
+  input {
+    flex: none;
+  }
+}
+
+/* Privacy page */
+
+.policy {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 16px 64px;
+}
+
+.policy h1 {
+  margin: 24px 0 0;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.policy h2 {
+  margin: 28px 0 4px;
+  font-size: 1.0625rem;
+}
+
+.policy p {
+  margin: 0;
+}
+
+.back,
+.effective {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
