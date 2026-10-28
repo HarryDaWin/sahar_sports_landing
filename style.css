@@ -50,13 +50,22 @@ a {
 
 .logo {
   margin: 0;
-  font-size: 2.25rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+}
+
+.logo img,
+.pattern {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.pattern {
+  margin-top: 24px;
 }
 
 .tagline {
-  margin: 8px 0 32px;
+  margin: 12px 0 32px;
   color: var(--muted);
   font-size: 1.125rem;
 }
